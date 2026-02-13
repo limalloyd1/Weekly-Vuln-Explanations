@@ -1,0 +1,42 @@
+WEEKLY VULNERABILITY WRITEUP - WEEK 2 
+REMOTE CODE EXCECUTION (RCE) VULNERABILITY EXPLANATION
+
+SUMMARY:
+A remote code excecution attack is where an attacker finds a roundabout way to excecute code on an organization's computers or network. The code excecutions can be used for various purposes, including deploying additional malware or stealing sensitive data.
+
+RCE attacks generally occur via vulnerabilities found in web applications and network infrastructure. The attack targets systems with vulnerabilities that allow for code excecution on devices. Several types of vulnerabilities can be used for RCE including:
+
+Injection Vulnerabilities: An injection vulnerability, like a SQL injection or command injection, is enabled by poor input sanitization. If a user provides carefully crafted malicious input into a sink, some of their provided data will be interpreted as commands to be excecuted. This allows the attacker to force the vulnerable machine to excecuted the attacker provided code. 
+
+Insecure deserialization: Serialization simplifies the transmission of sets of data by packing it into a single string of bits to be unpacked by the recipient system. However, if the structure of serialized data is not well defined, an attacker may be able to craft an input that is misinterpreted when it is unpacked. Depending on how the data is stored and processed, this misinterpretation may allow the attacker to achieve code execution.
+
+Out-of-bounds write: A buffer is a fixed-size piece of memory that is allocated to stroe data. Insecure data reads or writes could allow an attacker to place data where it would be interpreted as code or as important control flow information for the application. 
+
+File Management: Some applications allow users to upload files to a server. The access that this provides may allow an attacker to upload a fule containing malicious code and trick the application into executing it 
+
+TL;DR
+Malware generally is attacker-provided code that is designed to be executed ona target system. An RCE vulnerability simply allows an attacker to deploy malware in different ways.
+
+SYMPTOMS OF INFECTION
+RCE is normally a high severity vulnerability because of what it allows the attacket to do. By opening the door for attackers to execute malicious code various other common attacks become a possibility as well. RCE can serve as a big cascading catalyst for a system to be completely compromised. Examples of common attacks that can stem from a RCE vulnerability:
+
+Remote Access: RCE vulnerabilities are commonly used to give an attacker an initial foothold on a network that they could then expand. For example, an RCE vulnerability could allow an attacker to steal login credentials that would allow them network access via a VPN. 
+
+Malware Deployment: Though RCE vulnerabilites allow code execution, the code itself may still be small in scope. To get around this limitation, attackers may use RCE to download and execute other, more destructive malware. For example, RCE could be used to download and execute ransomware on a vulnerable system. 
+
+Data Theft: RCE vulnerabilities could allow an attacker to run commands within a vulnerable application. This may provide access to the filesystem, databases, and other stores of sensitive corporate and customer data.
+
+Data Destruction: RCE vulnerabilities could allow an attacker to run DROP commands within a database or execute code within the system terminal. This access provides the same ability to delete files that a legitimate user would have.
+
+DoS Attacks: Out-of-bounds write vulnerabilites allow an attacker to overwrite critical code, crashing an application. Other RCE vulnerabilites could allow the termination of processes or deletion of vital data. 
+
+PREVENTION
+Some methods to reduce exposure to RCE attacks include the following:
+
+Vulnerability scanning: A combination of static code analysis (having QA reviewers look over infrastructure regularly) to identify well-known vulnerability patterns and dynamic analysis like fuzzing can help developers identify holes in their code infrastructure before they are exploited.
+
+Updating and patching: RCE vulnerabilities may be discovered in an application or the third-party libraries that is depends on. Promptly applying updates and patches reduces the window during which vulnerable code could be exploited. 
+
+Input Validation: Most RCE vulnerabilites involve poor input validation, where an application makes assumptions about user input. Robust input sanitization is one good way to eliminate the threat of most RCE vulnerabilites. 
+
+Network Monitoring: Attempted RCE exploits can be detected and blocked by a web application and API protection (WAAP) solution. Deploying network security solutions in front of web applications can reduce the potential risks of unpatched vulnerabilites  
